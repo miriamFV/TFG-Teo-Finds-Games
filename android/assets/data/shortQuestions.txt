@@ -1,0 +1,3 @@
+Tengo una granja con 20 animales, entre vacas, cerdos y conejos. Tengo 20 kilos de comida a repartir entre mis animales, a las vacas les doy 3 kilos, a los cerdos 2 kilos y a los conejos medio kilo. Tras el reparto no me sobra ni me falta comida, y tengo al menos una vaca, un cerdo y un conejo. ¿Cuantas vacas, cerdos y conejos tengo?-
+
+Tienes nueve ladrillos y dos de ellos son mas pesados que el resto. ¿Cual es el numero maximo de veces que tendras que levantar ladrillos para encontrar los dos mas pesados? (Teniendo en cuenta que los dos ladrillos pesados son contiguos)

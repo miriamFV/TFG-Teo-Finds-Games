@@ -1,0 +1,38 @@
+Nuestro amigo Teo iba conduciendo su automóvil cuando de repente se averió. Por suerte Teo estaba cerca de un pueblo, y allí podría arreglar el coche pero... ¡Teo no tiene con qué pagar la reparación del coche!.
+Haz que Teo encuentre a los habitantes del pueblo y hable con ellos, seguramente le propongan juegos y acertijos, y si les ayuda a resolverlos le darán una recompensa económica. Consigue 100 monedas para que Teo pueda seguir su viaje.-
+
+Se tienen 3 piezas blancas situadas a la izquierda y 3 negras a la derecha.
+Hay que cambiar la posición de las piezas blancas y las piezas negras, es decir, que las blancas pasen a la derecha y las negras a la izquierda.
+Para mover una pieza se pulsa sobre ella. Las piezas blancas solo se desplazan hacia la derecha, y las piezas negras solo hacia la izquierda. Si se pulsa una pieza que tiene el hueco adyacente a ella, esta pieza se moverá a ese hueco. Si entre la pieza pulsada y el hueco hay una pieza del otro color, la pieza pulsada “saltará” hacia el hueco.-
+
+En este juego un granjero tiene una col, una cabra y un lobo, necesita cruzar un rio y para ello dispone de una barca en la que cabe él y otro de sus acompañantes, o la col, o la cabra o el lobo.
+El granjero no puede dejar a la cabra y al lobo solos en una orilla, pues el lobo se comería a la cabra. De igual manera pasa con la cabra y la col.
+El objetivo es cruzar el rio sin que nadie sea devorado.-
+
+En la pantalla de menú puedes seleccionar el número de piezas con el que quieres jugar, variando entre 3 y 8.
+Se tienen tres postes y tantas piezas como se seleccionaron de tamaño creciente. El juego comienza con todas las piezas situadas en un mismo poste, de manera que las piezas más pequeñas descansan sobre las más grandes. El objetivo es cambiar todas las piezas de poste con la dificultad de que no se puede colocar una pieza mayor sobre otra menor.-
+
+Para resolver el rompecabezas tendremos que desplazar las piezas hacía el único hueco libre. Si se pulsa sobre una pieza adyacente al hueco solo se desplaza esa pieza, mientras que si se pulsa una pieza (en la misma fila o columna en la que se encuentra el hueco) a una distancia de “x” piezas, se desplazarán las “x” piezas.-
+
+Se tiene un tablero de 4x4 en el que inicialmente se tienen dos baldosas con dos números. El objetivo es desplazar las baldosas en las cuatro direcciones posibles de forma que si dos baldosas con un mismo número “colisionan” se obtiene una única baldosa con la suma de ambos números, así pues se pueden tener baldosas con los números potencias de dos hasta 2048. Obtener ese número, 2048, es el objetivo del juego.-
+
+El objetivo de este juego es sacar la pieza roja del tablero. Para mover las piezas se pulsará sobre ellas, en concreto sobre el extremo hacia donde se quiere que se desplace la pieza (si queremos que se desplace hacia la derecha pulsaremos en su extremo derecho, etc.).-
+
+En el menú se elegiran el número de filas y columnas, entre 3 y 6 (por defecto 3x3).
+El juego consiste en, dado el tablero, conseguir que todos los botones tengan el mismo número, da igual cuál sea.
+Para cambiar un número bastará con pulsar sobre ese botón, entonces el número se incrementará en uno, excepto cuando el número sea 6, que de forma cíclica se volverá al 1.
+Si el botón pulsado está en una esquina, se incrementa ese botón y todos los que tenga alrededor, si no, se incrementará dicho botón y aquellos botones que compartan arista con él.-
+
+El juego consiste en formar una línea con tres piezas, ya sea en horizontal, vertical o diagonal antes de que lo consiga el adversario, para colocar una pieza basta con pulsar en la posición deseada.-
+
+El objetivo de este juego es golpear tantos topos como sea posible. Los topos saldrán de su madriguera, entonces habrá que tocarlos para golpearlos. El juego durará diez segundos, si en ese tiempo se ha golpeado a cinco o más topos, se conseguirá una moneda por cada topo golpeado a partir del quinto, es decir, si se ha golpeado a seis topos se consigue una moneda, a siete topos dos monedas, etc. En cambio si no se ha logrado golpear a más de cinco topos no se obtendrá recompensa.-
+
+Se tienen 4 maniquís, uno con ropa marrón y el otro con ropa azul. Hay que cambiarles la ropa con la ayuda de los dos maniquís restantes. Se pueden poner prendas de color azul sobre prendas de color marrón y viceversa, pero no se puede colocar una prenda “interior” sobre una “exterior”. Por ejemplo, no se puede colocar el jersey sobre la gabardina. Algunas prendas se mueven de manera individual y otras en conjunto.-
+
+Se mostrará un tablero con forma de cruz, cada botón tendrá un número. 
+El objetivo del juego es que en el tablero aparezcan todos los números del 1 al 8, sin repetirse ninguno y de forma que no haya dos números consecutivos en casillas adyacentes. Para cambiar de número se pulsará sobre el botón, entonces el número incrementará en uno. Si el número es 8, cambiará de forma cíclica a 1.-
+
+Se muestra la figura de la llave en color gris. Deberán moverse los trozos de la llave hasta reconstruirla, para mover un trozo basta con arrastrarlo con el dedo.-
+
+Se muestra una figura en color gris y unas piezas de colores con las que formar la figura. Cada pieza gira 45 grados en sentido antihorario cada vez que se pulsa sobre ella. Deberán colocarse todas las piezas en su posición, las piezas se mueven arrastrándolas con el dedo.
+
