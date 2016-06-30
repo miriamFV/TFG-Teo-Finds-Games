@@ -2,7 +2,9 @@ package com.teo_finds_games.screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,13 +21,14 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.teo_finds_games.Application;
 import com.teo_finds_games.Controller;
 import com.teo_finds_games.actors.Inhabitants;
 import com.teo_finds_games.actors.Player;
 
-public class PlayScreen implements Screen {
+public class PlayScreen implements Screen{
 
     private final Application app;
 
@@ -55,6 +58,8 @@ public class PlayScreen implements Screen {
     //Inhabitants
     private Inhabitants inhabitantSolYSombra, inhabitantColCabraLobo, inhabitantTorresHanoi, inhabitantRompecabezas, inhabitant2048,inhabitantUnblockIt, inhabitantTresEnRaya, inhabitantFlip, inhabitantMatatopos, inhabitantCambioRopa, inhabitantOchoNumeros, inhabitantLlave, inhabitantAlimentarAnimales, inhabitantNueveLadrillos, inhabitantTangram ;
 
+    //Music
+    private Music music;
 
     public PlayScreen(Application app){
         this.app = app;
@@ -62,7 +67,16 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
+
         //Set processor
         Gdx.input.setInputProcessor(stage);
         //Create the map
@@ -71,6 +85,7 @@ public class PlayScreen implements Screen {
 
         this.playerPosition = app.getPlayerPosition();
 
+        initMusic();
         initTextures();
         initAnimations();
         initLabels();
@@ -78,6 +93,19 @@ public class PlayScreen implements Screen {
         initInhabitants();
         initButtons();
         initTouchpad();
+
+        if(hasWon()){
+            float delay = 1.5f; // seconds
+
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    app.setScreen(app.endScreen);
+                }
+            }, delay);
+        }
+
+
     }
 
     public void update(float delta){
@@ -87,7 +115,6 @@ public class PlayScreen implements Screen {
         mapButton.setPosition(centerX + app.camera.viewportWidth / 2 - mapButton.getWidth() - 10, centerY - app.camera.viewportHeight / 2 + 10);
         numCoinsLabel.setPosition(centerX - app.camera.viewportWidth / 2 + coinsFrame.getRegionWidth() + 20, player.getY() + app.camera.viewportHeight / 2 - 10);
         touchpad.setPosition(centerX - app.camera.viewportWidth / 2, centerY - app.camera.viewportHeight / 2);
-
     }
 
     @Override
@@ -148,8 +175,14 @@ public class PlayScreen implements Screen {
         map.dispose();
         renderer.dispose();
         transparentTexture.dispose();
+        music.dispose();
     }
 
+    public void initMusic(){
+        music = Gdx.audio.newMusic( Gdx.files.internal("sounds/forestSong.wav"));
+        music.setVolume(1);
+        music.play();
+    }
 
     private void initTextures(){
         transparentTexture = new Texture(Gdx.files.internal("images/pantallaprincipal/transparent.png"));
@@ -240,6 +273,10 @@ public class PlayScreen implements Screen {
     public void initTouchpad(){
         touchpad = new Controller(player, app.camera);
         stage.addActor(touchpad);
+    }
+
+    public boolean hasWon(){
+        return app.getNumCoins()>=100;
     }
 
 }

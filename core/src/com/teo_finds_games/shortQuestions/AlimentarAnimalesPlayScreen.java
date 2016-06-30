@@ -156,6 +156,7 @@ public class AlimentarAnimalesPlayScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
                         @Override
                         public void run() {
+                            app.alimentarAnimalesCS.setNumCoins(3);
                             app.setScreen(app.alimentarAnimalesCS);
                         }
                     })));

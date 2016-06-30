@@ -30,6 +30,7 @@ import com.teo_finds_games.miniJuegos.torresHanoi.TorresHanoiPlayScreen;
 import com.teo_finds_games.miniJuegos.tresEnRaya.TresEnRayaPlayScreen;
 import com.teo_finds_games.miniJuegos.unblockIt.UnblockItPlayScreen;
 import com.teo_finds_games.screens.CongratulationsScreen;
+import com.teo_finds_games.screens.EndScreen;
 import com.teo_finds_games.screens.HowToPlayScreen;
 import com.teo_finds_games.screens.MapScreen;
 import com.teo_finds_games.screens.PlayScreen;
@@ -56,6 +57,7 @@ public class Application extends Game {
     public SplashScreen splashScreen;
     public PlayScreen playScreen;
     public MapScreen mapScreen;
+    public EndScreen endScreen;
 
     FileHandle file;
     String[] arrayWelcomeTexts, arrayExplanationTexts, arrayShortQuestionsText;
@@ -107,7 +109,7 @@ public class Application extends Game {
         splashScreen = new SplashScreen(this);
         playScreen = new PlayScreen(this);
         mapScreen = new MapScreen(this);
-
+        endScreen = new EndScreen(this);
 
         // PlayScreens
         solYSombraPlayScreen = new SolYSombraPlayScreen(this);
@@ -167,21 +169,21 @@ public class Application extends Game {
         nueveLadrillosWS = new WelcomeScreen(this, arrayWelcomeTexts[13], nueveLadrillosPlayScreen);
 
         //CongratulationsScreens
-        colCabraLoboCS = new CongratulationsScreen(this, 5);
-        solYSombraCS = new CongratulationsScreen(this, 8);
-        torresHanoiCS = new CongratulationsScreen(this, 10);
-        rompecabezasCS = new CongratulationsScreen(this, 9);
-        dosMilCuarentaYOchoCS = new CongratulationsScreen(this,12);
-        unblockItCS = new CongratulationsScreen(this,7);
-        tresEnRayaCS = new CongratulationsScreen(this,4);
-        matatoposCS = new CongratulationsScreen(this, 6);
-        cambioRopaCS = new CongratulationsScreen(this,10);
-        ochoNumerosCS = new CongratulationsScreen(this,7);
-        flipCS = new CongratulationsScreen(this,9);
-        llaveCS = new CongratulationsScreen(this,7);
-        alimentarAnimalesCS = new CongratulationsScreen(this,2);
-        nueveLadrillosCS = new CongratulationsScreen(this,2);
-        tangramCS = new CongratulationsScreen(this,10);
+        colCabraLoboCS = new CongratulationsScreen(this);
+        solYSombraCS = new CongratulationsScreen(this);
+        torresHanoiCS = new CongratulationsScreen(this);
+        rompecabezasCS = new CongratulationsScreen(this);
+        dosMilCuarentaYOchoCS = new CongratulationsScreen(this);
+        unblockItCS = new CongratulationsScreen(this);
+        tresEnRayaCS = new CongratulationsScreen(this);
+        matatoposCS = new CongratulationsScreen(this);
+        cambioRopaCS = new CongratulationsScreen(this);
+        ochoNumerosCS = new CongratulationsScreen(this);
+        flipCS = new CongratulationsScreen(this);
+        llaveCS = new CongratulationsScreen(this);
+        alimentarAnimalesCS = new CongratulationsScreen(this);
+        nueveLadrillosCS = new CongratulationsScreen(this);
+        tangramCS = new CongratulationsScreen(this);
 
         //SorryScreens
         colCabraLoboSS = new SorryScreen(this, colCabraLoboPlayScreen);
@@ -215,14 +217,11 @@ public class Application extends Game {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        skin.dispose();
-        myfont.dispose();
-
         //screens
         splashScreen.dispose();
         playScreen.dispose();
         mapScreen.dispose();
+        endScreen.dispose();
 
         //WelcomeScreens
         solYSombraWS.dispose();
@@ -303,6 +302,10 @@ public class Application extends Game {
         alimentarAnimalesSS.dispose();
         nueveLadrillosSS.dispose();
         matatoposSS.dispose();
+
+        batch.dispose();
+        skin.dispose();
+        myfont.dispose();
     }
 
     private void initSkin(){
@@ -343,7 +346,6 @@ public class Application extends Game {
         file = Gdx.files.internal("data/shortQuestions.txt");
         arrayShortQuestionsText = file.readString().split("-");
     }
-
 
     public Vector2 getPlayerPosition() {
         return playerPosition;

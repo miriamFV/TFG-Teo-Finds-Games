@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.tresEnRaya;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -47,7 +48,15 @@ public class TresEnRayaPlayScreen implements Screen{
     @Override
     public void show() {
         moveNumber = 0;
-        stage = new Stage(new FitViewport(app.vpWidth,app.vpHeight)); //Fitviewport keeps aspect ratio with black bars
+        stage = new Stage(new FitViewport(app.vpWidth,app.vpHeight)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        }; //Fitviewport keeps aspect ratio with black bars
         Gdx.input.setInputProcessor(stage);
 
         initTextures();
@@ -76,6 +85,7 @@ public class TresEnRayaPlayScreen implements Screen{
             stage.addAction(Actions.sequence(Actions.delay(2f), Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    app.tresEnRayaCS.setNumCoins(4);
                     app.setScreen(app.tresEnRayaCS);
                 }
             })));

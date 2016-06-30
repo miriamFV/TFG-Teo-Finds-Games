@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.matatopos;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -33,7 +34,15 @@ public class MatatoposPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
@@ -52,7 +61,10 @@ public class MatatoposPlayScreen implements Screen {
     public void update(float delta){
         long elapsedTime = TimeUtils.timeSinceMillis(startTime);
         if(elapsedTime > 10*1000){
-            if(MatatoposMoleActor.hitedMoles > 5){
+            if(MatatoposMoleActor.hitMoles > 6){
+                System.out.println("hitMoles = "+MatatoposMoleActor.hitMoles);
+                System.out.println("hitMoles-5 = "+(MatatoposMoleActor.hitMoles-5));
+                app.matatoposCS.setNumCoins(MatatoposMoleActor.hitMoles-6); //The player will get a coin for each mole hit from the fifth topo
                 app.setScreen(app.matatoposCS);
             }else{
                 app.setScreen(app.matatoposSS);

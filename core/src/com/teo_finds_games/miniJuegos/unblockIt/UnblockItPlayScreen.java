@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.unblockIt;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,14 +22,12 @@ public class UnblockItPlayScreen implements Screen {
     private final Application app;
     private Stage stage;
 
-    //private static final float SCALE = 2.78f;
     public static final int SCALE = 3;
 
-    //private TextureAtlas spriteSheet;
     private TextureRegion boardTR, longBlockTR, shortBlockTR, redBlockTR;
     private UnblockItBlockActor longBlockActor1, longBlockActor2, longBlockActor3, longBlockActor4, shortBlockActor1, shortBlockActor2, shortBlockActor3, redBlockActor;
 
-    public static int[][] matrix = new int[6][6]; //matriz de 0 y 1, 0 position libre, 1 posicion ocupada
+    public static int[][] matrix = new int[6][6]; //matrix of 0 y 1, 0 free position, 1 full position.
     public static Vector2 boardPosition;
 
     private TextButton backButton;
@@ -42,12 +41,19 @@ public class UnblockItPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new FitViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         stage.clear();
         solutionFound = false;
 
-        //spriteSheet = new TextureAtlas(Gdx.files.internal("images/imagesUnblockIt.pack"));
         initMatrix();
         initTextures();
         boardPosition = new Vector2((app.vpWidth-boardTR.getRegionWidth()*SCALE)/2, (app.vpHeight-boardTR.getRegionHeight()*SCALE)/2);
@@ -57,7 +63,6 @@ public class UnblockItPlayScreen implements Screen {
 
     public void update(float delta){
         if(solutionFound){
-            System.out.println("entra en if(solutionFound) de update");
             stage.addAction(Actions.sequence(Actions.delay(0.5f), Actions.run(new Runnable() {
                 @Override
                 public void run() {
@@ -69,6 +74,7 @@ public class UnblockItPlayScreen implements Screen {
             }), Actions.delay(1.5f),  Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    app.unblockItCS.setNumCoins(6);
                     app.setScreen(app.unblockItCS);
                 }
             })));
@@ -118,7 +124,6 @@ public class UnblockItPlayScreen implements Screen {
         longBlockTR.getTexture().dispose();
         shortBlockTR.getTexture().dispose();
         redBlockTR.getTexture().dispose();
-        //spriteSheet.dispose();
     }
 
     public void initMatrix(){
@@ -157,20 +162,7 @@ public class UnblockItPlayScreen implements Screen {
         ------------------------------------------------
         | (5,0) | (5,1) | (5,2) | (5,3) | (5,4) | (5,5) |
          */
-        /*
-        //LEVEL 1
-        longBlockActor1 = new BlockActor(longBlockTR, 2, 3, 3, 90);
-        stage.addActor(longBlockActor1);
 
-        longBlockActor2 = new BlockActor(longBlockTR, 4, 0, 3, 0);
-        stage.addActor(longBlockActor2);
-
-        shortBlockActor = new BlockActor(shortBlockTR, 5, 4, 2, 90);
-        stage.addActor(shortBlockActor);
-
-        redBlockActor = new BlockActor(redBlockTR, 2, 0, 2, 0);
-        stage.addActor(redBlockActor);
-        */
         longBlockActor1 = new UnblockItBlockActor(longBlockTR, false, 3, 0, 3, 90);
         stage.addActor(longBlockActor1);
         longBlockActor2 = new UnblockItBlockActor(longBlockTR, false, 5, 2, 3, 0);

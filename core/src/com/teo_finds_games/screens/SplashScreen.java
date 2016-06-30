@@ -1,6 +1,7 @@
 package com.teo_finds_games.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -35,7 +36,15 @@ public class SplashScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         initTextures();
         initImages();

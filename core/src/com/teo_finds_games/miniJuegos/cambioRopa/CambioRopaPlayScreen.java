@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.cambioRopa;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -33,7 +34,15 @@ public class CambioRopaPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(app.vpWidth, app.vpHeight));
+        stage = new Stage(new FitViewport(app.vpWidth, app.vpHeight)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
 
         initTextures();
@@ -55,6 +64,7 @@ public class CambioRopaPlayScreen implements Screen {
             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    app.cambioRopaCS.setNumCoins(10);
                     app.setScreen(app.cambioRopaCS);
                 }
             })));

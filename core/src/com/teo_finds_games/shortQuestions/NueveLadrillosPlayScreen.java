@@ -129,6 +129,7 @@ public class NueveLadrillosPlayScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
                         @Override
                         public void run() {
+                            app.nueveLadrillosCS.setNumCoins(2);
                             app.setScreen(app.nueveLadrillosCS);
                         }
                     })));

@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.dosmilcuarentayocho;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Interpolation;
@@ -54,7 +55,15 @@ public class DosMilCuarentaYOchoPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         stage.clear();
         buttonSize = new Vector2(app.vpHeight / (NUM + 2), app.vpHeight / (NUM + 2));
@@ -141,6 +150,7 @@ public class DosMilCuarentaYOchoPlayScreen implements Screen {
                     stage.addAction(Actions.sequence(Actions.delay(1f), Actions.run(new Runnable() {
                         @Override
                         public void run() {
+                            app.dosMilCuarentaYOchoCS.setNumCoins(14);
                             app.setScreen(app.dosMilCuarentaYOchoCS);
                         }
                     })));

@@ -2,7 +2,9 @@ package com.teo_finds_games.screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,6 +26,7 @@ public class HowToPlayScreen implements Screen {
     private String explanationText;
     private TextButton jugarButton;
     private Screen screen;
+    private Music music;
 
     public HowToPlayScreen(Application app, String explanationText, Screen screen){
         this.app = app;
@@ -33,10 +36,19 @@ public class HowToPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         batch = new SpriteBatch();
 
+        initMusic();
         initButtons();
         initLabels();
     }
@@ -77,6 +89,13 @@ public class HowToPlayScreen implements Screen {
     public void dispose() {
         Gdx.input.setInputProcessor(null);
         stage.dispose();
+        music.dispose();
+    }
+
+    public void initMusic(){
+        music = Gdx.audio.newMusic( Gdx.files.internal("sounds/etude.mp3"));
+        music.setVolume(1);
+        music.play();
     }
 
     public void initLabels() {

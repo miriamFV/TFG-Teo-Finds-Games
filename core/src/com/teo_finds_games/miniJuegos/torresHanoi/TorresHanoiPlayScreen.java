@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.torresHanoi;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,7 +32,15 @@ public class TorresHanoiPlayScreen implements Screen{
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(app.vpWidth, app.vpHeight));
+        stage = new Stage(new FitViewport(app.vpWidth, app.vpHeight)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
@@ -54,6 +63,7 @@ public class TorresHanoiPlayScreen implements Screen{
             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    app.torresHanoiCS.setNumCoins(TorresHanoiMenuScreen.numPieces+1); //If there are x pieces, the player will win x+1 coins, etc
                     app.setScreen(app.torresHanoiCS);
                 }
             })));
@@ -101,7 +111,7 @@ public class TorresHanoiPlayScreen implements Screen{
     }
 
     public void initButtons(){
-        backButton = new TextButton("BACK", app.skin);
+        backButton = new TextButton("ATRAS", app.skin);
         backButton.setSize(125, 75);
         backButton.setPosition(40, app.vpHeight - (backButton.getHeight() + 40));
         backButton.addListener(new ClickListener(){

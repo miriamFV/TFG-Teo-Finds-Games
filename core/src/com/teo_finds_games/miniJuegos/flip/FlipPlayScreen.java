@@ -2,6 +2,7 @@ package com.teo_finds_games.miniJuegos.flip;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -46,7 +47,15 @@ public class FlipPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         stage.clear();
         sound = Gdx.audio.newSound( Gdx.files.internal("sounds/flipClickSound.wav"));
@@ -73,16 +82,6 @@ public class FlipPlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         update(delta);
         stage.draw();
-        /*
-        if(solutionFound()){
-            stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    app.setScreen(app.flipCS);
-                }
-            })));
-        }
-        */
 
         app.batch.begin();
         app.batch.end();
@@ -167,6 +166,7 @@ public class FlipPlayScreen implements Screen {
                             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
                                 @Override
                                 public void run() {
+                                    app.flipCS.setNumCoins((numRows-3)+(numColumns-3)+FlipMenuScreen.difficultyLevel);
                                     app.setScreen(app.flipCS);
                                 }
                             })));;

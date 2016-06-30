@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.llave;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -36,7 +37,15 @@ public class LlavePlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         benchmark = new Vector2( (app.vpWidth-FRAME_SIZE.x*SCALE)/2, (app.vpHeight-FRAME_SIZE.y*SCALE)/2);
         Gdx.input.setInputProcessor(stage);
         stage.clear();
@@ -51,6 +60,7 @@ public class LlavePlayScreen implements Screen {
             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    app.llaveCS.setNumCoins(7);
                     app.setScreen(app.llaveCS);
                 }
             })));

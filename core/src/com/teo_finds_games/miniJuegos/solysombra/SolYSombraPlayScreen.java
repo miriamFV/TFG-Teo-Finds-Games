@@ -2,6 +2,7 @@ package com.teo_finds_games.miniJuegos.solysombra;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -40,7 +41,15 @@ public class SolYSombraPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(app.vpWidth,app.vpHeight)); //Fitviewport keeps aspect ratio with black bars
+        stage = new Stage(new FitViewport(app.vpWidth,app.vpHeight)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        }; //Fitviewport keeps aspect ratio with black bars
         Gdx.input.setInputProcessor(stage);
         stage.clear();
         initArray();
@@ -60,6 +69,7 @@ public class SolYSombraPlayScreen implements Screen {
             stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    app.solYSombraCS.setNumCoins(8);
                     app.setScreen(app.solYSombraCS);
                 }
             })));

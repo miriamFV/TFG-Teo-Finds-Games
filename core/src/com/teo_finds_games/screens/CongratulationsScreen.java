@@ -1,6 +1,7 @@
 package com.teo_finds_games.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -33,14 +34,21 @@ public class CongratulationsScreen implements Screen {
     private Texture congratulationsTexture;
     private Image textImage;
 
-    public CongratulationsScreen(Application app, int numCoins){
+    public CongratulationsScreen(Application app){
         this.app = app;
-        this.numCoins = numCoins;
     }
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
 
         int oldNumCoins = app.getNumCoins();
@@ -78,7 +86,6 @@ public class CongratulationsScreen implements Screen {
 
         app.batch.begin();
         app.batch.end();
-
     }
 
     @Override
@@ -126,6 +133,14 @@ public class CongratulationsScreen implements Screen {
         bountyLabel.setColor(Color.BLACK);
         bountyLabel.setPosition((app.vpWidth - bountyLabel.getWidth()) / 2, app.vpHeight / 2 + 150);
         stage.addActor(bountyLabel);
+    }
+
+    public int getNumCoins() {
+        return numCoins;
+    }
+
+    public void setNumCoins(int numCoins) {
+        this.numCoins = numCoins;
     }
 
 }

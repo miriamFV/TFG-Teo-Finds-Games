@@ -1,6 +1,7 @@
 package com.teo_finds_games.miniJuegos.rompecabezas;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -41,7 +42,15 @@ public class RompecabezasPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
@@ -160,6 +169,7 @@ public class RompecabezasPlayScreen implements Screen {
                                 moveButtons(pieceX, pieceY);
 
                                 if(solutionFound()){
+                                    app.rompecabezasCS.setNumCoins(10);
                                     app.setScreen(app.rompecabezasCS);
                                 }
                             }else{

@@ -34,13 +34,13 @@ public class MatatoposMoleActor extends Actor {
 
     private Rectangle rectangleMole;
     private TextureRegion moleRegion;
-    public static int hitedMoles = 0;
+    public static int hitMoles = 0;
 
     public MatatoposMoleActor(Texture texture,int moleNumber){
         this.moleNumber = moleNumber;
         moleTexture = texture;
 
-        hitedMoles = 0;
+        hitMoles = 0;
         settingCharacteristics(); //Sets object's characteristics
         addingListener();
         addingActions();
@@ -77,10 +77,10 @@ public class MatatoposMoleActor extends Actor {
         //Adding a listener to our actor
         addListener((new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button)        {
-                MatatoposPlayScreen.ntLabel.setText("Topos golpeados = "+hitedMoles);
+                MatatoposPlayScreen.ntLabel.setText("Topos golpeados = "+ hitMoles);
                 isAlive = false;
-                hitedMoles++;
-                Action delay = Actions.delay(hitedMoles * 0.5f);
+                hitMoles++;
+                Action delay = Actions.delay(hitMoles * 0.5f);
                 addAction(delay);
                 return true;
             }
@@ -97,7 +97,7 @@ public class MatatoposMoleActor extends Actor {
     }
 
     public void addingActions(){
-        Action delay = Actions.delay(randomFloat()+hitedMoles*0.5f);
+        Action delay = Actions.delay(randomFloat()+ hitMoles *0.5f);
         Action up = Actions.moveBy(0,200,0.5f);
         Action down = Actions.moveBy(0,-200, 0.5f);
         SequenceAction seq = new SequenceAction(delay,up,down);

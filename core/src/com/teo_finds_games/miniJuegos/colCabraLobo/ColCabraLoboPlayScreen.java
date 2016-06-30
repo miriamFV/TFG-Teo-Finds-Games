@@ -2,6 +2,7 @@ package com.teo_finds_games.miniJuegos.colCabraLobo;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -30,7 +31,15 @@ public class ColCabraLoboPlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera));
+        stage = new Stage(new StretchViewport(app.vpWidth, app.vpHeight, app.camera)){
+            @Override
+            public boolean keyDown(int keyCode) {
+                if (keyCode == Input.Keys.BACK) {
+                    System.exit(0);
+                }
+                return super.keyDown(keyCode);
+            }
+        };
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
@@ -56,6 +65,7 @@ public class ColCabraLoboPlayScreen implements Screen {
             stage.addAction(Actions.sequence(Actions.delay(3f),Actions.run(new Runnable(){
                 @Override
                 public void run() {
+                    app.colCabraLoboCS.setNumCoins(5);
                     app.setScreen(app.colCabraLoboCS);
                 }
             })));
@@ -107,19 +117,11 @@ public class ColCabraLoboPlayScreen implements Screen {
     }
 
     private void initTextureRegions(){
-        /*
-        backgroundTR = spriteSheet.findRegion("background");
-        boatTR = spriteSheet.findRegion("boat");
-        wolfTR = spriteSheet.findRegion("wolf");
-        goatTR = spriteSheet.findRegion("sheep");
-        cabbageTR = spriteSheet.findRegion("cabbage");
-        */
         backgroundTR = new TextureRegion(new Texture(Gdx.files.internal("images/colcabralobo/background.png")));
         boatTR = new TextureRegion(new Texture(Gdx.files.internal("images/colcabralobo/boat.png")));
         wolfTR = new TextureRegion(new Texture(Gdx.files.internal("images/colcabralobo/wolf.png")));
         goatTR = new TextureRegion(new Texture(Gdx.files.internal("images/colcabralobo/goat.png")));
         cabbageTR = new TextureRegion(new Texture(Gdx.files.internal("images/colcabralobo/cabbage.png")));
-
     }
 
     public void setBackground(){
@@ -133,7 +135,7 @@ public class ColCabraLoboPlayScreen implements Screen {
 
     private void initButtons(){
         //BACK BUTTON
-        backButton = new TextButton("BACK", app.skin);
+        backButton = new TextButton("ATRAS", app.skin);
         backButton.setSize(125, 75);
         backButton.setPosition(20, app.vpHeight - (backButton.getHeight() + 20));
         backButton.addListener(new ClickListener(){
